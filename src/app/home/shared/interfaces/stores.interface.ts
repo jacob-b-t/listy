@@ -4,6 +4,7 @@ export interface StoresInterface {
   address: AddressInterface;
   image: string;
   guid: string;
+  orderPriority: number;
 }
 
 export interface OpeningHoursInterface {

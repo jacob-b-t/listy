@@ -9,7 +9,7 @@ import { StoreListDataService } from '../../services/store-list-data.service';
 })
 export class StoreListPage implements OnInit, AfterViewInit, OnDestroy {
 
-  constructor(private storeDataService: StoreListDataService) { }
+  constructor(private storeListDataService: StoreListDataService) { }
 
   public finishedLoading: boolean = false;
 
@@ -17,10 +17,10 @@ export class StoreListPage implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit() {
     this.subscriptions.push(
-      this.storeDataService.storageReady().subscribe((val) => {
+      this.storeListDataService.storageReady().subscribe((val) => {
         console.log(val);
         if (val) {
-          this.storeDataService.getAllStores();
+          this.storeListDataService.getAllStores();
         }
       })
     )
