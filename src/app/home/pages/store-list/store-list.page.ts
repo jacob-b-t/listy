@@ -13,6 +13,10 @@ export class StoreListPage implements OnInit, AfterViewInit, OnDestroy {
 
   public finishedLoading: boolean = false;
 
+  //UI values
+  public daysInWeek: string[] = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+  public addressFields: string[] = ['line1', 'line2', 'line3', 'city', 'county', 'postcode'];
+
   private subscriptions: Subscription[] = [];
 
   ngOnInit() {
@@ -20,7 +24,8 @@ export class StoreListPage implements OnInit, AfterViewInit, OnDestroy {
       this.storeListDataService.storageReady().subscribe((val) => {
         console.log(val);
         if (val) {
-          this.storeListDataService.getAllStores();
+          this.storeListDataService.getAllStores()
+          .then(() => this.finishedLoading = true);
         }
       })
     )

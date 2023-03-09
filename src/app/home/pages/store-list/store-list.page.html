@@ -13,4 +13,28 @@
     </ion-toolbar>
   </ion-header>
 
+  <ion-list *ngIf="!finishedLoading">
+    <div class="list-item" *ngFor="let i of addressFields">
+      <ion-list-header>
+        <ion-skeleton-text [animated]="true" class="list-item_skeleton-text_1"></ion-skeleton-text>
+      </ion-list-header>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text [animated]="true" class="list-item_skeleton-text_2"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text [animated]="true" class="list-item_skeleton-text_3"></ion-skeleton-text>
+          </p>
+          <p *ngFor="let i of daysInWeek">
+            <ion-skeleton-text [animated]="true" class="list-item_skeleton-text_4"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+    </div>
+  </ion-list>
+
 </ion-content>

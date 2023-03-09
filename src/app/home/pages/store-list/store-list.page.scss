@@ -1,0 +1,22 @@
+
+.list-item {
+  padding-top: 2%;
+
+  &_skeleton-text {
+    &_1 {
+      width: 80px;
+    }
+
+    &_2 {
+      width: 80%;
+    }
+
+    &_3 {
+      width: 60%;
+    }
+
+    &_4 {
+      width: 30%;
+    }
+  }
+}
