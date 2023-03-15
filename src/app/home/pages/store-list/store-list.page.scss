@@ -1,22 +1,25 @@
+@import '../../shared/global.scss';
+.home {
 
-.list-item {
-  padding-top: 2%;
+  &__list-item {
+    padding-top: 2%;
 
-  &_skeleton-text {
-    &_1 {
-      width: 80px;
-    }
+    &_skeleton-text {
+      &_1 {
+        width: 80px;
+      }
 
-    &_2 {
-      width: 80%;
-    }
+      &_2 {
+        width: 80%;
+      }
 
-    &_3 {
-      width: 60%;
-    }
+      &_3 {
+        width: 60%;
+      }
 
-    &_4 {
-      width: 30%;
+      &_4 {
+        width: 30%;
+      }
     }
   }
 }

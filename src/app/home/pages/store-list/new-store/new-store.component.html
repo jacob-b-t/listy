@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add a new store</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancel()">Cancel</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <div [formGroup]="form">
+    <ion-list class="phone-modal__floating-input">
+      <ion-item class="phone-modal__floating-input">
+        <ion-label position="stacked">Shop name</ion-label>
+        <ion-input placeholder="Enter text" type="text" formControlName="storeName"></ion-input>
+      </ion-item>
+      <ion-accordion-group [multiple]="true" [value]="['address', 'hours']">
+        <ion-accordion value="address">
+          <ion-item slot="header" color="light">
+            <ion-label>
+              Address
+            </ion-label>
+          </ion-item>
+          <div formGroupName="address" slot="content">
+            <ion-item *ngFor="let control of addressFormStructure" class="phone-modal__floating-input">
+              <ion-label position="stacked">{{control.label}}</ion-label>
+              <ion-input placeholder="Enter text" type="text" formControlName="{{control.control}}"></ion-input>
+            </ion-item>
+          </div>
+        </ion-accordion>
+        <ion-accordion value="hours">
+          <ion-item slot="header" color="light">
+            <ion-label>
+              Opening Hours
+            </ion-label>
+          </ion-item>
+          <div formGroupName="openingHours" slot="content">
+            <ion-item *ngFor="let control of hoursFormStructure" class="phone-modal__floating-input">
+              <ion-label position="stacked">{{control.label}}</ion-label>
+              <ion-input placeholder="Enter text" type="text" formControlName="{{control.control}}"></ion-input>
+            </ion-item>
+          </div>
+        </ion-accordion>
+      </ion-accordion-group>
+    </ion-list>
+  </div>
+</ion-content>

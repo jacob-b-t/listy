@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { ShoppingListPageRoutingModule } from './shopping-list-routing.module';
+import { SharedModule} from '../../shared/components/shared.module';
 
 import { ShoppingListPage } from './shopping-list.page';
 
@@ -13,7 +14,8 @@ import { ShoppingListPage } from './shopping-list.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    ShoppingListPageRoutingModule
+    ShoppingListPageRoutingModule,
+    SharedModule
   ],
   declarations: [ShoppingListPage]
 })

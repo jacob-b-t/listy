@@ -7,14 +7,17 @@ import { IonicModule } from '@ionic/angular';
 import { StoreListPageRoutingModule } from './store-list-routing.module';
 
 import { StoreListPage } from './store-list.page';
+import { NewStoreComponent } from './new-store/new-store.component';
+import { SharedModule} from '../../shared/components/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    StoreListPageRoutingModule
+    StoreListPageRoutingModule,
+    SharedModule,
   ],
-  declarations: [StoreListPage]
+  declarations: [StoreListPage, NewStoreComponent]
 })
 export class StoreListPageModule {}

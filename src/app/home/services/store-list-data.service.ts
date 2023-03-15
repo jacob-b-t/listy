@@ -3,6 +3,8 @@ import { StorageService } from './storage.service';
 import { StoresInterface } from '../shared/interfaces/stores.interface';
 import { Observable } from 'rxjs/internal/Observable';
 import { v4 as UUID } from 'uuid';
+import { BehaviorSubject } from 'rxjs';
+import { mockStoreObject } from '../shared/mock-data/store.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -11,8 +13,12 @@ export class StoreListDataService {
   constructor(private storageService: StorageService) {}
 
   //data holding objects
-  public stores: StoresInterface[] = [];
+  private stores: StoresInterface[] = [];
   private storesGuids: string[] = [];
+
+  //Observables
+  private storesSubject: BehaviorSubject<StoresInterface[]> = new BehaviorSubject([mockStoreObject]);
+  public storesSubject$ = this.storesSubject.asObservable();
 
   //DB key values
   private storesGuidsKey: string = 'storesGuids';
@@ -44,11 +50,12 @@ export class StoreListDataService {
     this.storageService
       .set(storeObject.guid, storeObject)
       .then(() => this.stores.push(storeObject))
-      .then(() => this.sortStoresByPriority());
+      .then(() => this.sortStoresByPriority())
+      .then(() => this.storesSubject.next(this.stores));
   }
 
   //read
-  public getAllStores(): Promise<StoresInterface[] | null> {
+  public getAllStores(): Promise<boolean> {
     return Promise.all([
       this.storageService
         .get(this.storesGuidsKey)
@@ -66,7 +73,8 @@ export class StoreListDataService {
         }),
     ])
       .then(() => this.sortStoresByPriority())
-      .then(() => this.stores);
+      .then(() => this.storesSubject.next(this.stores))
+      .then(() => true);
   }
 
   //update
@@ -76,7 +84,8 @@ export class StoreListDataService {
     );
     this.stores[storeIndex] = storeObject;
     this.sortStoresByPriority();
-    this.storageService.set(storeObject.guid, storeObject);
+    this.storageService.set(storeObject.guid, storeObject)
+    .then(() => this.storesSubject.next(this.stores))
   }
 
   //delete
@@ -95,7 +104,8 @@ export class StoreListDataService {
     Promise.all([
       this.storageService.set(this.storesGuidsKey, this.storesGuids),
       this.storageService.delete(guid),
-    ]).then(() => this.sortStoresByPriority());
+    ]).then(() => this.sortStoresByPriority())
+    .then(() => this.storesSubject.next(this.stores));
   }
 
   private sortStoresByPriority(): void {
