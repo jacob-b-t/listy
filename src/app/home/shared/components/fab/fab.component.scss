@@ -1,0 +1,8 @@
+@use '../../../../styles/index.scss' as index;
+
+//Global palette colours added manual as SCSS global variables do not work with material components due to CSS processing
+ion-fab-button {
+  --background: #B2A4FF;
+  --background-activated: #B08BBB;
+  --color: #EEEEEE;
+}

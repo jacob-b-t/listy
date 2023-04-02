@@ -1,0 +1,24 @@
+@use "palette" as *;
+
+.phone-modal {
+  &__floating-input {
+    --background: none;
+    background: none;
+  }
+
+  &__button-container {
+    padding: 10px 0;
+  }
+
+  &__button {
+    --background: #B2A4FF;
+  }
+
+  &__required {
+    color: $required;
+  }
+
+  &__cancel {
+    --color: #B2A4FF;
+  }
+}

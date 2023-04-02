@@ -1,59 +1,72 @@
-import { FormControlStructure } from '../../../shared/interfaces/form-structure.interface'
+import { FormControlStructure } from '../../../shared/interfaces/form-structure.interface';
 
 export const addressFormStructure: FormControlStructure[] = [
   {
     label: 'First line of address',
-    control: 'addressLineOne'
+    control: 'addressLineOne',
+    required: true,
   },
   {
     label: 'Second line of address',
-    control: 'addressLineTwo'
+    control: 'addressLineTwo',
+    required: false,
   },
   {
     label: 'Third line of address',
-    control: 'addressLineThree'
+    control: 'addressLineThree',
+    required: false,
   },
   {
     label: 'City',
-    control: 'city'
+    control: 'city',
+    required: true,
   },
   {
     label: 'County',
-    control: 'county'
+    control: 'county',
+    required: true,
   },
   {
     label: 'Postcode',
-    control: 'postcode'
-  }
-]
+    control: 'postcode',
+    required: true,
+  },
+];
 
 export const hoursFormStructure: FormControlStructure[] = [
   {
     label: 'Sunday',
-    control: 'sunday'
+    control: 'sunday',
+    required: true,
   },
   {
     label: 'Monday',
-    control: 'monday'
+    control: 'monday',
+    required: true,
   },
   {
     label: 'Tuesday',
-    control: 'tuesday'
+    control: 'tuesday',
+    required: true,
   },
   {
     label: 'Wednesday',
-    control: 'wednesday'
+    control: 'wednesday',
+    required: true,
   },
   {
     label: 'Thursday',
-    control: 'thursday'
+    control: 'thursday',
+    required: true,
   },
   {
     label: 'Friday',
-    control: 'friday'
+    control: 'friday',
+    required: true,
   },
   {
     label: 'Saturday',
-    control: 'saturday'
-  }
-]
+    control: 'saturday',
+    required: true,
+  },
+];

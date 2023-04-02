@@ -2,7 +2,7 @@ export interface StoresInterface {
   name: string;
   openingHours: OpeningHoursInterface;
   address: AddressInterface;
-  image: string;
+  image?: string;
   guid: string;
   orderPriority: number;
 }

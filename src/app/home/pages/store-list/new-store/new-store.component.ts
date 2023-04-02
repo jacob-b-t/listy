@@ -1,8 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
-import { ModalService } from '../../../services/modal.service';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ModalService, StoreListDataService } from '../../../services';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { addressFormStructure, hoursFormStructure } from './form-structures';
 import { FormControlStructure } from '../../../shared/interfaces/form-structure.interface';
 
@@ -18,7 +23,8 @@ export class NewStoreComponent implements OnInit {
     private actionSheetCtrl: ActionSheetController,
     private modalCtrl: ModalController,
     private modalService: ModalService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private storeListDataService: StoreListDataService,
   ) {}
 
   public form: FormGroup = new FormGroup({});
@@ -31,12 +37,12 @@ export class NewStoreComponent implements OnInit {
     this.presentingElement = document.querySelector('.ion-page');
   }
 
-  public cancel() {
+  public cancel(): void {
     return this.modalService.cancel();
   }
 
-  public captureInput(event: any): void {
-    console.log(this.form);
+  public addNewStore(): void {
+    console.log(this.form)
   }
 
   private formInit(): void {
@@ -44,8 +50,9 @@ export class NewStoreComponent implements OnInit {
       storeName: new FormControl('', Validators.required),
       image: new FormControl(''),
       address: this.addressFormInit(),
-      openingHours: this.openingHoursInit()
-    })
+      openingHours: this.openingHoursInit(),
+      orderPriority: new FormControl(''),
+    });
   }
 
   private addressFormInit(): FormGroup {
@@ -55,8 +62,8 @@ export class NewStoreComponent implements OnInit {
       addressLineThree: new FormControl(''),
       city: new FormControl('', Validators.required),
       county: new FormControl(''),
-      postcode: new FormControl('', Validators.required)
-    })
+      postcode: new FormControl('', Validators.required),
+    });
   }
 
   private openingHoursInit(): FormGroup {
@@ -67,7 +74,7 @@ export class NewStoreComponent implements OnInit {
       wednesday: new FormControl('', Validators.required),
       thursday: new FormControl('', Validators.required),
       friday: new FormControl('', Validators.required),
-      saturday: new FormControl('', Validators.required)
-    })
+      saturday: new FormControl('', Validators.required),
+    });
   }
 }

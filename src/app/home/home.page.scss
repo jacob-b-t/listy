@@ -31,4 +31,8 @@ ion-tabs {
   .tabs-inner {
     z-index: 100;
   }
+
+  ion-tab-bar {
+    --color-selected: #B2A4FF;
+  }
 }

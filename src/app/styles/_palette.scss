@@ -1,0 +1,16 @@
+// global color palette
+// any variables not referencing a material component can use a global variable
+// if using against material component, must be hard coded into the component scss file
+//primary
+$primary: #B2A4FF;
+$primary-interaction: #B08BBB;
+$required: #911F27;
+$success: #68B984;
+$invalid: #FF1700;
+$warning: #FFD24C;
+$ghost: #F7F7F7;
+
+//secondary
+$dusty-rose: #FFAEC0;
+$accent: #EEEEEE;
+$soft-blue: #A2D2FF;

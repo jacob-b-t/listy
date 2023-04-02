@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title>Add a new store</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="cancel()">Cancel</ion-button>
+      <ion-button class="phone-modal__cancel" (click)="cancel()">Cancel</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -10,7 +10,7 @@
   <div [formGroup]="form">
     <ion-list class="phone-modal__floating-input">
       <ion-item class="phone-modal__floating-input">
-        <ion-label position="stacked">Shop name</ion-label>
+        <ion-label position="stacked">Shop name<span class="phone-modal__required">*</span></ion-label>
         <ion-input placeholder="Enter text" type="text" formControlName="storeName"></ion-input>
       </ion-item>
       <ion-accordion-group [multiple]="true" [value]="['address', 'hours']">
@@ -22,7 +22,8 @@
           </ion-item>
           <div formGroupName="address" slot="content">
             <ion-item *ngFor="let control of addressFormStructure" class="phone-modal__floating-input">
-              <ion-label position="stacked">{{control.label}}</ion-label>
+              <ion-label position="stacked">{{control.label}}<span class="phone-modal__required"
+                  *ngIf="control.required">*</span></ion-label>
               <ion-input placeholder="Enter text" type="text" formControlName="{{control.control}}"></ion-input>
             </ion-item>
           </div>
@@ -35,12 +36,21 @@
           </ion-item>
           <div formGroupName="openingHours" slot="content">
             <ion-item *ngFor="let control of hoursFormStructure" class="phone-modal__floating-input">
-              <ion-label position="stacked">{{control.label}}</ion-label>
+              <ion-label position="stacked">{{control.label}}<span class="phone-modal__required"
+                  *ngIf="control.required">*</span></ion-label>
               <ion-input placeholder="Enter text" type="text" formControlName="{{control.control}}"></ion-input>
             </ion-item>
           </div>
         </ion-accordion>
       </ion-accordion-group>
     </ion-list>
+
+    <div class="ion-float-right phone-modal__button-container">
+      <ion-button class="phone-modal__button" [disabled]="!form.valid" size="default" (click)="addNewStore()">
+        Add store
+        <ion-icon slot="end" name="add"></ion-icon>
+      </ion-button>
+    </div>
+
   </div>
 </ion-content>

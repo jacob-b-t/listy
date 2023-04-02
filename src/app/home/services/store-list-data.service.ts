@@ -31,6 +31,8 @@ export class StoreListDataService {
   //public CRUD functions
 
   //create
+  //call the createNewStoreGuid first to add it to the array of guids and have the new stores guid returned
+  //as a promise, use this returned guid in the new store creation
   public createNewStoreGuid(): Promise<string> {
     let currentStoreGuids: string[] = [];
     let guid = UUID();
@@ -46,6 +48,8 @@ export class StoreListDataService {
     ]).then(() => guid);
   }
 
+  //once createNewStoreGuide has resolved, use that returned as the object passed to the below function
+  //along with the new store form to create a new store in the DB
   public createNewStore(storeObject: StoresInterface): void {
     this.storageService
       .set(storeObject.guid, storeObject)
