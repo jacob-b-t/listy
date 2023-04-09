@@ -7,4 +7,9 @@ export interface ActionSheetInput {
 export interface ButtonOptions {
   text: string;
   role: string;
+  data?: DataObject
+}
+
+export interface DataObject {
+  action: string;
 }

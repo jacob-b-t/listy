@@ -1,1 +1,8 @@
-@use '../../../../app.component.scss'
+@use '../../../../app.component.scss';
+
+.image-button {
+  --background: #B08BBB;
+  --background-activated: #B2A4FF;
+  --color: #EEEEEE;
+}
+

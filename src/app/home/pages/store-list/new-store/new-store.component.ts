@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActionSheetController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
-import { ModalService, StoreListDataService, ImageService } from '../../../services';
+import { ModalService, StoreListDataService, ImageService, ActionSheetInput, ActionSheetService } from '../../../services';
 import {
   FormBuilder,
   FormControl,
@@ -9,7 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { addressFormStructure, hoursFormStructure } from './form-structures';
-import { modalCancel } from './new-form-interfaces';
+import { modalCancel, imageOptions } from './new-form-interfaces';
 import { FormControlStructure } from '../../../shared/interfaces/form-structure.interface';
 
 @Component({
@@ -21,7 +20,7 @@ export class NewStoreComponent implements OnInit {
   public presentingElement: Element | null = null;
 
   constructor(
-    private actionSheetCtrl: ActionSheetController,
+    private actionService: ActionSheetService,
     private modalCtrl: ModalController,
     private modalService: ModalService,
     private fb: FormBuilder,
@@ -34,21 +33,42 @@ export class NewStoreComponent implements OnInit {
   public addressFormStructure: FormControlStructure[] = addressFormStructure;
   public hoursFormStructure: FormControlStructure[] = hoursFormStructure;
 
+  //action sheets
+  private modalCancel: ActionSheetInput = modalCancel;
+  private imageOptions: ActionSheetInput = imageOptions;
+
   ngOnInit() {
     this.formInit();
     this.presentingElement = document.querySelector('.ion-page');
   }
 
   public cancel(): void {
-    return this.modalService.cancel(modalCancel);
+    return this.modalService.cancel(this.modalCancel);
   }
 
   public addNewStore(): void {
     console.log(this.form)
   }
 
-  public takeNewPhoto(): void {
-    this.imageService.captureNewPhoto();
+  public addNewImage(): void {
+    this.actionService.openReturningActionSheet(this.imageOptions).then((selection) => {
+      if (selection === 'photo') {
+        this.takeNewPhoto();
+      } else if (selection === 'file') {
+        this.getImageFromGallery();
+      }
+    })
+    .catch((res) => {});
+  }
+
+  private takeNewPhoto(): void {
+    this.imageService.captureNewPhoto().then((photo) => {
+      console.log(photo);
+    });
+  }
+
+  private getImageFromGallery(): void {
+    console.log(this.imageService.selectImage())
   }
 
   private formInit(): void {

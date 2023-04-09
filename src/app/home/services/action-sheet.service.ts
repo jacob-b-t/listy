@@ -9,7 +9,7 @@ export class ActionSheetService {
 
   constructor(private actionSheetCtrl: ActionSheetController,) { }
 
-  public async openConfirmationActionSheet(actionSheetInput: ActionSheetInput) {
+  public async openConfirmationActionSheet(actionSheetInput: ActionSheetInput): Promise<boolean> {
     const actionSheet = await this.actionSheetCtrl.create({
       header: actionSheetInput.header,
       buttons: actionSheetInput.buttons
@@ -19,7 +19,19 @@ export class ActionSheetService {
 
     const { role } = await actionSheet.onWillDismiss();
 
-    console.log(role)
     return role === actionSheetInput.role;
   };
+
+  public async openReturningActionSheet(actionSheetInput: ActionSheetInput): Promise<string> {
+    const actionSheet = await this.actionSheetCtrl.create({
+      header: actionSheetInput.header,
+      buttons: actionSheetInput.buttons
+    });
+
+    actionSheet.present();
+
+    const { role } = await actionSheet.onWillDismiss();
+
+    return role as string;
+  }
 }
