@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
-import { ModalService, StoreListDataService } from '../../../services';
+import { ModalService, StoreListDataService, ImageService } from '../../../services';
 import {
   FormBuilder,
   FormControl,
@@ -9,6 +9,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { addressFormStructure, hoursFormStructure } from './form-structures';
+import { modalCancel } from './new-form-interfaces';
 import { FormControlStructure } from '../../../shared/interfaces/form-structure.interface';
 
 @Component({
@@ -25,6 +26,7 @@ export class NewStoreComponent implements OnInit {
     private modalService: ModalService,
     private fb: FormBuilder,
     private storeListDataService: StoreListDataService,
+    private imageService: ImageService,
   ) {}
 
   public form: FormGroup = new FormGroup({});
@@ -38,11 +40,15 @@ export class NewStoreComponent implements OnInit {
   }
 
   public cancel(): void {
-    return this.modalService.cancel();
+    return this.modalService.cancel(modalCancel);
   }
 
   public addNewStore(): void {
     console.log(this.form)
+  }
+
+  public takeNewPhoto(): void {
+    this.imageService.captureNewPhoto();
   }
 
   private formInit(): void {
@@ -57,24 +63,24 @@ export class NewStoreComponent implements OnInit {
 
   private addressFormInit(): FormGroup {
     return this.fb.group({
-      addressLineOne: new FormControl('', Validators.required),
+      addressLineOne: new FormControl(''),
       addressLineTwo: new FormControl(''),
       addressLineThree: new FormControl(''),
-      city: new FormControl('', Validators.required),
+      city: new FormControl(''),
       county: new FormControl(''),
-      postcode: new FormControl('', Validators.required),
+      postcode: new FormControl(''),
     });
   }
 
   private openingHoursInit(): FormGroup {
     return this.fb.group({
-      sunday: new FormControl('', Validators.required),
-      monday: new FormControl('', Validators.required),
-      tuesday: new FormControl('', Validators.required),
-      wednesday: new FormControl('', Validators.required),
-      thursday: new FormControl('', Validators.required),
-      friday: new FormControl('', Validators.required),
-      saturday: new FormControl('', Validators.required),
+      sunday: new FormControl(''),
+      monday: new FormControl(''),
+      tuesday: new FormControl(''),
+      wednesday: new FormControl(''),
+      thursday: new FormControl(''),
+      friday: new FormControl(''),
+      saturday: new FormControl(''),
     });
   }
 }

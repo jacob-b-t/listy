@@ -4,7 +4,7 @@ export const addressFormStructure: FormControlStructure[] = [
   {
     label: 'First line of address',
     control: 'addressLineOne',
-    required: true,
+    required: false,
   },
   {
     label: 'Second line of address',
@@ -19,17 +19,17 @@ export const addressFormStructure: FormControlStructure[] = [
   {
     label: 'City',
     control: 'city',
-    required: true,
+    required: false,
   },
   {
     label: 'County',
     control: 'county',
-    required: true,
+    required: false,
   },
   {
     label: 'Postcode',
     control: 'postcode',
-    required: true,
+    required: false,
   },
 ];
 
@@ -37,36 +37,36 @@ export const hoursFormStructure: FormControlStructure[] = [
   {
     label: 'Sunday',
     control: 'sunday',
-    required: true,
+    required: false,
   },
   {
     label: 'Monday',
     control: 'monday',
-    required: true,
+    required: false,
   },
   {
     label: 'Tuesday',
     control: 'tuesday',
-    required: true,
+    required: false,
   },
   {
     label: 'Wednesday',
     control: 'wednesday',
-    required: true,
+    required: false,
   },
   {
     label: 'Thursday',
     control: 'thursday',
-    required: true,
+    required: false,
   },
   {
     label: 'Friday',
     control: 'friday',
-    required: true,
+    required: false,
   },
   {
     label: 'Saturday',
     control: 'saturday',
-    required: true,
+    required: false,
   },
 ];

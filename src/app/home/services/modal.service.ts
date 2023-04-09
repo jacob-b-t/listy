@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
-import { ActionSheetController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
+import { ActionSheetInput } from './action-sheet.interface';
+import { ActionSheetService } from './action-sheet.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModalService {
 
-  constructor(private actionSheetCtrl: ActionSheetController, private modalCtrl: ModalController) { }
+  constructor(private modalCtrl: ModalController, private actionSheetSerivce: ActionSheetService) { }
 
-  public cancel() {
-    this.canDismiss().then((p) => {
+  public cancel(actionSheetInput: ActionSheetInput) {
+    this.actionSheetSerivce.openConfirmationActionSheet(actionSheetInput).then((p) => {
       if (p) {
         return this.modalCtrl.dismiss(null, 'cancel');
       } else {
@@ -18,27 +19,5 @@ export class ModalService {
       }
     })
   }
-
-  private canDismiss = async () => {
-    const actionSheet = await this.actionSheetCtrl.create({
-      header: 'Are you sure?',
-      buttons: [
-        {
-          text: 'Yes',
-          role: 'confirm',
-        },
-        {
-          text: 'No',
-          role: 'cancel',
-        },
-      ],
-    });
-
-    actionSheet.present();
-
-    const { role } = await actionSheet.onWillDismiss();
-
-    return role === 'confirm';
-  };
 
 }
